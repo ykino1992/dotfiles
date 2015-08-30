@@ -69,3 +69,5 @@ set swapfile
 set directory=/tmp
 set backup
 set backupdir=/tmp
+
+set backspace=indent,eol,start
