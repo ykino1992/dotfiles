@@ -33,6 +33,9 @@ NeoBundle 'scrooloose/nerdtree'
 " かっこいいカラースキーマ
 NeoBundle 'w0ng/vim-hybrid'
 
+" Slim用シンタックス
+NeoBundle "slim-template/vim-slim"
+
 call neobundle#end()
 
 " Required:
@@ -48,15 +51,21 @@ NeoBundleCheck
 
 colorscheme hybrid
 
+syntax on
+
 set encoding=UTF-8
 set fileencoding=UTF-8
 set termencoding=UTF-8
 set expandtab
 set smarttab
 set autoindent
-set tabstop=4 shiftwidth=4 softtabstop=4
+set tabstop=2 shiftwidth=2 softtabstop=2
 set cursorline
 set number
 set showmatch
 set incsearch
 set noswapfile
+set swapfile
+set directory=/tmp
+set backup
+set backupdir=/tmp
