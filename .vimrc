@@ -73,3 +73,7 @@ set undofile
 set undodir=/tmp
 
 set backspace=indent,eol,start
+
+if !argc()
+  autocmd vimenter * NERDTree
+endif
