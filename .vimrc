@@ -80,7 +80,8 @@ if !argc()
   autocmd vimenter * NERDTree
 endif
 
+" 行末の空白を保存時に削除 #vim-trailing-whitespaceに依存
 aug space
   au!
-  autocmd BufWritePre * :%s/\s\s*$
+  autocmd BufWritePre * :FixWhitespace
 aug END
