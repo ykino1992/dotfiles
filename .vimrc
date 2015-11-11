@@ -81,7 +81,14 @@ if !argc()
 endif
 
 " 行末の空白を保存時に削除 #vim-trailing-whitespaceに依存
+fun! FixWhitespace()
+  " Don't strip on these filetypes
+  if &ft =~ 'markdown'
+      return
+  endif
+  :FixWhitespace
+endfun
 aug space
   au!
-  autocmd BufWritePre * :FixWhitespace
+  autocmd BufWritePre * call FixWhitespace()
 aug END
