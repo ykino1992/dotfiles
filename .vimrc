@@ -36,13 +36,15 @@ NeoBundle 'w0ng/vim-hybrid'
 " Slim用シンタックス
 NeoBundle "slim-template/vim-slim"
 
+" 空白の可視化
+NeoBundle 'bronson/vim-trailing-whitespace'
+
 call neobundle#end()
 
 " Required:
 filetype plugin indent on
 
 " 未インストールのプラグインがある場合、インストールするかどうかを尋ねてくれるようにする設定
-" 毎回聞かれると邪魔な場合もあるので、この設定は任意です。
 NeoBundleCheck
 
 "-------------------------
@@ -77,3 +79,8 @@ set backspace=indent,eol,start
 if !argc()
   autocmd vimenter * NERDTree
 endif
+
+aug space
+  au!
+  autocmd BufWritePre * :%s/\s\s*$
+aug END
