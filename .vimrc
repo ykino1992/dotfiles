@@ -76,6 +76,10 @@ set undodir=/tmp
 
 set backspace=indent,eol,start
 
+" phpはハードタブで
+au BufNewFile,BufRead *.php set noexpandtab tabstop=4 shiftwidth=4
+
+" 引数がない時はNERDTreeを起動
 if !argc()
   autocmd vimenter * NERDTree
 endif
