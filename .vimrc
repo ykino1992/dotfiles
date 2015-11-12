@@ -76,6 +76,9 @@ set undodir=/tmp
 
 set backspace=indent,eol,start
 
+" txtの自動改行解除
+autocmd FileType text setlocal textwidth=0
+
 " phpはハードタブで
 au BufNewFile,BufRead *.php set noexpandtab tabstop=4 shiftwidth=4
 
