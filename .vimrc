@@ -39,6 +39,9 @@ NeoBundle "slim-template/vim-slim"
 " 空白の可視化
 NeoBundle 'bronson/vim-trailing-whitespace'
 
+" coffee
+NeoBundle 'kchmck/vim-coffee-script'
+
 call neobundle#end()
 
 " Required:
@@ -80,7 +83,7 @@ set backspace=indent,eol,start
 autocmd FileType text setlocal textwidth=0
 
 " phpはハードタブで
-au BufNewFile,BufRead *.php set noexpandtab tabstop=4 shiftwidth=4
+au BufNewFile,BufRead *.php setlocal noexpandtab ts=4 sw=4
 
 " 引数がない時はNERDTreeを起動
 if !argc()
@@ -99,3 +102,6 @@ aug space
   au!
   autocmd BufWritePre * call FixWhitespace()
 aug END
+
+" coffee用
+au BufRead,BufNewFile,BufReadPre *.coffee   set filetype=coffee
