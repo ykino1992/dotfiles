@@ -42,6 +42,13 @@ NeoBundle 'bronson/vim-trailing-whitespace'
 " coffee
 NeoBundle 'kchmck/vim-coffee-script'
 
+" railsに超便利
+NeoBundle 'tpope/vim-rails'
+
+NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
+
 call neobundle#end()
 
 " Required:
