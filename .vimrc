@@ -50,6 +50,19 @@ NeoBundle 'Shougo/neosnippet-snippets'
 " ファイラー
 NeoBundle 'Shougo/unite.vim'
 
+NeoBundle 'Shougo/vimproc', {
+  \ 'build' : {
+    \ 'windows' : 'make -f make_mingw32.mak',
+    \ 'cygwin' : 'make -f make_cygwin.mak',
+    \ 'mac' : 'make -f make_mac.mak',
+    \ 'unix' : 'make -f make_unix.mak',
+  \ },
+\ }
+
+" ステータスラインをかっこよくする
+NeoBundle 'itchyny/lightline.vim'
+NeoBundle 'cocopon/lightline-hybrid.vim'
+
 call neobundle#end()
 
 " Required:
@@ -57,6 +70,16 @@ filetype plugin indent on
 
 " 未インストールのプラグインがある場合、インストールするかどうかを尋ねてくれるようにする設定
 NeoBundleCheck
+
+
+"-------------------------
+" LightLine
+"-------------------------
+
+set laststatus=2
+let g:lightline = {}
+let g:lightline.colorscheme = 'hybrid'
+
 
 "-------------------------
 " End Neobundle Settings.
