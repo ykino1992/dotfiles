@@ -84,6 +84,8 @@ NeoBundleCheck
 " for json
 let g:vim_json_syntax_conceal = 0
 
+let g:hybrid_use_Xresources = 1
+set background=dark
 colorscheme hybrid
 
 syntax on
