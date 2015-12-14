@@ -18,6 +18,9 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " syntastic
 NeoBundle 'scrooloose/syntastic'
 
+" jsonシンタックス
+NeoBundle 'elzr/vim-json'
+
 " インデントに色を付けて見やすくする
 NeoBundle 'nathanaelkane/vim-indent-guides'
 let g:indent_guides_enable_on_vim_startup = 1
@@ -49,7 +52,6 @@ NeoBundle 'Shougo/neosnippet-snippets'
 
 " ファイラー
 NeoBundle 'Shougo/unite.vim'
-
 NeoBundle 'Shougo/vimproc', {
   \ 'build' : {
     \ 'windows' : 'make -f make_mingw32.mak',
@@ -78,6 +80,10 @@ NeoBundleCheck
 "-------------------------
 " General Settings.
 "-------------------------
+
+" for json
+let g:vim_json_syntax_conceal = 0
+
 colorscheme hybrid
 
 syntax on
