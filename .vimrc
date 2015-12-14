@@ -70,17 +70,6 @@ filetype plugin indent on
 
 " 未インストールのプラグインがある場合、インストールするかどうかを尋ねてくれるようにする設定
 NeoBundleCheck
-
-
-"-------------------------
-" LightLine
-"-------------------------
-
-set laststatus=2
-let g:lightline = {}
-let g:lightline.colorscheme = 'hybrid'
-
-
 "-------------------------
 " End Neobundle Settings.
 "-------------------------
@@ -118,6 +107,15 @@ au BufNewFile,BufRead *.php setlocal noexpandtab ts=4 sw=4
 
 " coffee用
 au BufRead,BufNewFile,BufReadPre *.coffee   set filetype=coffee
+
+
+"-------------------------
+" LightLine
+"-------------------------
+
+set laststatus=2
+let g:lightline = {}
+let g:lightline.colorscheme = 'hybrid'
 
 
 "-------------------------
