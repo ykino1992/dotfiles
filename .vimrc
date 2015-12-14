@@ -27,9 +27,6 @@ let g:indent_guides_auto_colors=0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#333344 ctermbg=darkgray
 let g:indent_guides_guide_size = 1
 
-" ファイルをtree表示してくれる
-NeoBundle 'scrooloose/nerdtree'
-
 " かっこいいカラースキーマ
 NeoBundle 'w0ng/vim-hybrid'
 
@@ -49,6 +46,9 @@ NeoBundle 'tpope/vim-rails'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
+
+" ファイラー
+NeoBundle 'Shougo/unite.vim'
 
 call neobundle#end()
 
@@ -175,3 +175,18 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
+
+
+"-------------------------
+" Unite
+"-------------------------
+
+" Unite
+let g:unite_enable_start_insert=1
+let g:unite_source_history_yank_enable =1
+let g:unite_source_file_mru_limit = 200
+nnoremap <silent> ,uy :<C-u>Unite history/yank<CR>
+nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
+nnoremap <silent> ,uf :<C-u>Unite file<CR>
+nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
+nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
