@@ -93,12 +93,15 @@ autocmd FileType text setlocal textwidth=0
 " phpはハードタブで
 au BufNewFile,BufRead *.php setlocal noexpandtab ts=4 sw=4
 
-" 引数がない時はNERDTreeを起動
-if !argc()
-  autocmd vimenter * NERDTree
-endif
+" coffee用
+au BufRead,BufNewFile,BufReadPre *.coffee   set filetype=coffee
 
-" 行末の空白を保存時に削除 #vim-trailing-whitespaceに依存
+
+"-------------------------
+" vim-trailing-whitespace
+"-------------------------
+
+" 行末の空白を保存時に削除
 fun! FixWhitespace()
   " Don't strip on these filetypes
   if &ft =~ 'markdown'
@@ -110,10 +113,6 @@ aug space
   au!
   autocmd BufWritePre * call FixWhitespace()
 aug END
-
-" coffee用
-au BufRead,BufNewFile,BufReadPre *.coffee   set filetype=coffee
-
 
 
 "-------------------------
