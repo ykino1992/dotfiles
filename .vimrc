@@ -74,6 +74,10 @@ NeoBundleCheck
 " End Neobundle Settings.
 "-------------------------
 
+
+"-------------------------
+" General Settings.
+"-------------------------
 colorscheme hybrid
 
 syntax on
