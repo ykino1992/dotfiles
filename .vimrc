@@ -49,6 +49,7 @@ NeoBundle 'tpope/vim-rails'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'Shougo/neomru.vim'
 
 " ファイラー
 NeoBundle 'Shougo/unite.vim'
