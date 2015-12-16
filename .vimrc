@@ -50,6 +50,7 @@ NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/neomru.vim'
+NeoBundle 'Shougo/vimfiler'
 
 " ファイラー
 NeoBundle 'Shougo/unite.vim'
@@ -85,7 +86,6 @@ NeoBundleCheck
 " for json
 let g:vim_json_syntax_conceal = 0
 
-let g:hybrid_use_Xresources = 1
 set background=dark
 colorscheme hybrid
 
@@ -218,12 +218,13 @@ endif
 let g:unite_enable_start_insert=1
 let g:unite_source_history_yank_enable =1
 let g:unite_source_file_mru_limit = 200
-nnoremap <silent> ,uy :<C-u>Unite history/yank<CR>
-nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
-nnoremap <silent> ,uf :<C-u>Unite file<CR>
-nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
-nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
-nnoremap <silent> ,ug  :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
+nnoremap <silent> ,y :<C-u>Unite history/yank<CR>
+nnoremap <silent> ,b :<C-u>Unite buffer<CR>
+nnoremap <silent> ,f :<C-u>Unite file<CR>
+nnoremap <silent> ,c :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+nnoremap <silent> ,r :<C-u>Unite -buffer-name=register register<CR>
+nnoremap <silent> ,u :<C-u>Unite file_mru buffer<CR>
+nnoremap <silent> ,g  :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
 
 " unite grepにhw(highway)を使う
 if executable('hw')
@@ -231,3 +232,10 @@ if executable('hw')
   let g:unite_source_grep_default_opts = '--no-group --no-color'
   let g:unite_source_grep_recursive_opt = ''
 endif
+
+
+"-------------------------
+" vimfiler
+"-------------------------
+
+let g:vimfiler_as_default_explorer = 1
