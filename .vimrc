@@ -238,4 +238,4 @@ endif
 " vimfiler
 "-------------------------
 
-let g:vimfiler_as_default_explorer = 1
+nnoremap <silent> ,e :<C-u>:VimFilerExplore -split -winwidth=30 -find -no-quit<CR>
