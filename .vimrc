@@ -67,6 +67,16 @@ NeoBundle 'Shougo/vimproc', {
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'cocopon/lightline-hybrid.vim'
 
+" Ruby向けにendを自動挿入してくれる
+NeoBundle 'tpope/vim-endwise'
+
+" コメントON/OFFを手軽に実行
+NeoBundle 'tomtom/tcomment_vim'
+
+" ドキュメント参照
+NeoBundle 'thinca/vim-ref'
+" NeoBundle 'yuku-t/vim-ref-ri'
+
 call neobundle#end()
 
 " Required:
@@ -239,3 +249,10 @@ endif
 "-------------------------
 
 nnoremap <silent> ,e :<C-u>:VimFilerExplore -split -winwidth=30 -find -no-quit<CR>
+
+
+"-------------------------
+" vim-ref
+"-------------------------
+
+let g:ref_refe_cmd = $HOME.'/.rbenv/shims/refe' "refeコマンドのパス
