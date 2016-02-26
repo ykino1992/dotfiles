@@ -77,6 +77,8 @@ NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'thinca/vim-ref'
 " NeoBundle 'yuku-t/vim-ref-ri'
 
+NeoBundle 'kana/vim-fakeclip'
+
 call neobundle#end()
 
 " Required:
@@ -119,6 +121,7 @@ set backup
 set backupdir=/tmp
 set undofile
 set undodir=/tmp
+set clipboard=unnamed
 
 set backspace=indent,eol,start
 
