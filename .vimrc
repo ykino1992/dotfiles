@@ -63,6 +63,9 @@ NeoBundle 'Shougo/vimproc', {
   \ },
 \ }
 
+" 複数ファイル置き換え
+NeoBundle 'thinca/vim-qfreplace'
+
 " ステータスラインをかっこよくする
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'cocopon/lightline-hybrid.vim'
