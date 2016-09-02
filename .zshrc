@@ -17,6 +17,9 @@ export MANPAGER=/usr/local/bin/vimpager
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init - zsh)"
 
+# npm
+export PATH="/usr/local/share/npm/bin:$PATH"
+
 # -------------------------------------
 # zshのオプション
 # -------------------------------------
