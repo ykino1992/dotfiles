@@ -23,6 +23,8 @@ export PGDATA=/usr/local/var/postgres
 # npm
 export PATH="/usr/local/share/npm/bin:$PATH"
 
+export LIBRARY_PATH=/usr/local/lib:$LIBRARY_PATH
+
 # -------------------------------------
 # zshのオプション
 # -------------------------------------
