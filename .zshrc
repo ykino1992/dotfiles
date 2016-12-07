@@ -17,6 +17,9 @@ export MANPAGER=/usr/local/bin/vimpager
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init - zsh)"
 
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+
 # postgres
 export PGDATA=/usr/local/var/postgres
 
