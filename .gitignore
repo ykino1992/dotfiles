@@ -2,4 +2,5 @@
 .DS_Store
 vendor/bundler/
 .env
+.env.*
 local_docs/

@@ -82,6 +82,9 @@ NeoBundle 'thinca/vim-ref'
 
 NeoBundle 'kana/vim-fakeclip'
 
+NeoBundle 'digitaltoad/vim-pug'
+NeoBundle 'posva/vim-vue'
+
 call neobundle#end()
 
 " Required:
