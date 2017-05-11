@@ -84,6 +84,7 @@ NeoBundle 'kana/vim-fakeclip'
 
 NeoBundle 'digitaltoad/vim-pug'
 NeoBundle 'posva/vim-vue'
+NeoBundleLazy 'othree/yajs.vim', {'autoload':{'filetypes':['javascript']}}
 
 call neobundle#end()
 
