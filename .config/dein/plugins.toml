@@ -1,0 +1,93 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'Shougo/vimproc'
+build = 'make'
+
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+hook_add = '''
+  let g:deoplete#enable_at_startup = 1
+  inoremap <silent><expr> <TAB>
+        \ pumvisible() ? "\<C-n>" :
+        \ <SID>check_back_space() ? "\<TAB>" :
+        \ deoplete#manual_complete()
+'''
+
+[[plugins]]
+repo = 'kana/vim-fakeclip'
+
+[[plugins]]
+repo = 'osyo-manga/vim-monster'
+hook_add = '''
+  let g:monster#completion#rcodetools#backend = "async_rct_complete"
+  let g:deoplete#sources#omni#input_patterns = {
+  \   "ruby" : '[^. *\t]\.\w*\|\h\w*::',
+  \}
+'''
+
+# Color
+[[plugins]]
+repo = 'morhetz/gruvbox'
+
+# Status Line
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+hook_add = '''
+  set laststatus=2
+  let g:lightline = {}
+  let g:lightline.colorscheme = 'gruvbox'
+'''
+
+# Syntax
+[[plugins]]
+repo = 'w0rp/ale'
+
+# Indent Guides
+[[plugins]]
+repo = 'nathanaelkane/vim-indent-guides'
+hook_add = '''
+  let g:indent_guides_enable_on_vim_startup = 1
+  let g:indent_guides_start_level=2
+  let g:indent_guides_guide_size = 1
+'''
+
+# Whitespace
+[[plugins]]
+repo = 'bronson/vim-trailing-whitespace'
+hook_add = '''
+  " 行末の空白を保存時に削除
+  fun! FixWhitespace()
+    " Don't strip on these filetypes
+    if &ft =~ 'markdown'
+        return
+    endif
+    :FixWhitespace
+  endfun
+  aug vim-trailing-whitespace
+    au!
+    autocmd BufWritePre * call FixWhitespace()
+  aug END
+'''
+
+# Lang
+[[plugins]]
+repo = 'elzr/vim-json'
+hook_add = '''
+  let g:vim_json_syntax_conceal = 0
+'''
+[[plugins]]
+repo = 'kchmck/vim-coffee-script'
+
+# For Ruby
+[[plugins]]
+repo = 'tpope/vim-rails'
+repo = 'tpope/vim-endwise'
+
+[[plugins]] # Japanese doc
+repo = 'vim-jp/vimdoc-ja'
+on_ft = 'help'
+hook_add = '''
+    set helplang=ja,en
+'''

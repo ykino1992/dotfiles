@@ -1,0 +1,157 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'Townk/vim-autoclose'
+
+[[plugins]]
+repo = 'scrooloose/syntastic'
+
+[[plugins]]
+repo = 'elzr/vim-json'
+hook_add = '''
+  let g:vim_json_syntax_conceal = 0
+'''
+
+[[plugins]]
+repo = 'cespare/vim-toml'
+
+[[plugins]]
+repo = 'nathanaelkane/vim-indent-guides'
+hook_add = '''
+  let g:indent_guides_enable_on_vim_startup = 1
+  let g:indent_guides_start_level=2
+  let g:indent_guides_auto_colors=0
+  autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#333344 ctermbg=darkgray
+  let g:indent_guides_guide_size = 1
+'''
+
+[[plugins]]
+repo = 'morhetz/gruvbox'
+
+[[plugins]]
+repo = 'bronson/vim-trailing-whitespace'
+hook_add= '''
+  fun! FixWhitespace()
+    " Don't strip on these filetypes
+    if &ft =~ 'markdown'
+        return
+    endif
+    :FixWhitespace
+  endfun
+  aug space
+    au!
+    autocmd BufWritePre * call FixWhitespace()
+  aug END
+'''
+
+[[plugins]]
+repo = 'tpope/vim-dispatch'
+
+[[plugins]]
+repo = 'tpope/vim-rails'
+
+[[plugins]]
+repo = 'janko-m/vim-test'
+hook_add = '''
+  let test#strategy = "dispatch"
+  nnoremap <silent> ,tn :TestNearest<CR>
+  nnoremap <silent> ,tf :TestFile<CR>
+  nnoremap <silent> ,ts :TestSuite<CR>
+'''
+
+[[plugins]]
+repo = 'Shougo/neocomplcache'
+hook_add = '''
+  let g:acp_enableAtStartup = 0
+  let g:neocomplcache_enable_at_startup = 1
+  let g:neocomplcache_enable_smart_case = 1
+  let g:neocomplcache_min_syntax_length = 2
+  let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+  let g:neocomplcache_dictionary_filetype_lists = {
+      \ 'default' : ''
+      \ }
+  inoremap <expr><C-g>     neocomplcache#undo_completion()
+  inoremap <expr><C-l>     neocomplcache#complete_common_string()
+  " <CR>: close popup and save indent.
+  inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+  function! s:my_cr_function()
+    return neocomplcache#smart_close_popup() . "\<CR>"
+  endfunction
+  " <TAB>: completion.
+  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+  " <C-h>, <BS>: close popup and delete backword char.
+  inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+  inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+  inoremap <expr><C-y>  neocomplcache#close_popup()
+  inoremap <expr><C-e>  neocomplcache#cancel_popup()
+'''
+
+[[plugins]]
+repo = 'Shougo/neosnippet'
+hook_add = '''
+  imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+  smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+  xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+  smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+
+  if has('conceal')
+    set conceallevel=2 concealcursor=niv
+  endif
+'''
+
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+
+[[plugins]]
+repo = 'Shougo/neomru.vim'
+
+[[plugins]]
+repo = 'Shougo/vimfiler'
+hook_add= '''
+  nnoremap <silent> ,e :<C-u>:VimFilerExplore -split -winwidth=30 -find -no-quit<CR>
+'''
+
+[[plugins]]
+repo = 'Shougo/unite.vim'
+hook_add = '''
+  let g:unite_enable_start_insert=1
+  let g:unite_source_history_yank_enable =1
+  let g:unite_source_file_mru_limit = 200
+  nnoremap <silent> ,y :<C-u>Unite history/yank<CR>
+  nnoremap <silent> ,b :<C-u>Unite buffer<CR>
+  nnoremap <silent> ,f :<C-u>Unite file<CR>
+  nnoremap <silent> ,c :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+  nnoremap <silent> ,r :<C-u>Unite -buffer-name=register register<CR>
+  nnoremap <silent> ,u :<C-u>Unite file_mru buffer<CR>
+  nnoremap <silent> ,g :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
+
+  if executable('pt')
+    let g:unite_source_grep_command = 'pt'
+    let g:unite_source_grep_default_opts = '--nogroup --nocolor'
+    let g:unite_source_grep_recursive_opt = ''
+    let g:unite_source_grep_encoding = 'utf-8'
+  endif
+'''
+
+[[plugins]]
+repo = 'thinca/vim-qfreplace'
+
+[[plugins]]
+repo = 'tpope/vim-endwise'
+
+[[plugins]]
+repo = 'tomtom/tcomment_vim'
+
+[[plugins]]
+repo = 'kana/vim-fakeclip'
+
+[[plugins]]
+repo = 'digitaltoad/vim-pug'
+
+[[plugins]]
+repo = 'posva/vim-vue'
+
+[[plugins]]
+repo = 'othree/yajs.vim'
