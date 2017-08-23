@@ -2,9 +2,6 @@
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
-repo = 'Townk/vim-autoclose'
-
-[[plugins]]
 repo = 'scrooloose/syntastic'
 
 [[plugins]]
@@ -32,6 +29,7 @@ repo = 'morhetz/gruvbox'
 [[plugins]]
 repo = 'bronson/vim-trailing-whitespace'
 hook_add= '''
+  let g:extra_whitespace_ignored_filetypes = ['vimfiler']
   fun! FixWhitespace()
     " Don't strip on these filetypes
     if &ft =~ 'markdown'
@@ -110,6 +108,7 @@ repo = 'Shougo/neomru.vim'
 [[plugins]]
 repo = 'Shougo/vimfiler'
 hook_add= '''
+  let g:vimfiler_safe_mode_by_default=0
   nnoremap <silent> ,e :<C-u>:VimFilerExplore -split -winwidth=30 -find -no-quit<CR>
 '''
 

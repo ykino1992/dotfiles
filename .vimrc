@@ -29,6 +29,7 @@ set background=dark
 colorscheme gruvbox
 
 syntax on
+filetype plugin indent on
 
 set encoding=UTF-8
 set fileencoding=UTF-8
@@ -55,3 +56,5 @@ set backspace=indent,eol,start
 
 " txtの自動改行解除
 autocmd FileType text setlocal textwidth=0
+
+autocmd BufNewFile,BufRead *.{vue} set filetype=javascript
