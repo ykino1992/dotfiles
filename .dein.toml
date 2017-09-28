@@ -150,6 +150,9 @@ repo = 'kana/vim-fakeclip'
 repo = 'digitaltoad/vim-pug'
 
 [[plugins]]
+repo = 'slim-template/vim-slim.git'
+
+[[plugins]]
 repo = 'posva/vim-vue'
 
 [[plugins]]
