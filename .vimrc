@@ -58,3 +58,9 @@ set backspace=indent,eol,start
 autocmd FileType text setlocal textwidth=0
 
 autocmd BufNewFile,BufRead *.{vue} set filetype=javascript
+
+" Folding
+set nofoldenable
+set foldmethod=indent
+set foldlevel=2
+set foldnestmax=2
