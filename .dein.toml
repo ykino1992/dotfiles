@@ -11,6 +11,9 @@ hook_add = '''
 '''
 
 [[plugins]]
+repo = 'jparise/vim-graphql'
+
+[[plugins]]
 repo = 'cespare/vim-toml'
 
 [[plugins]]
