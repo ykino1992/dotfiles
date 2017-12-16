@@ -38,12 +38,11 @@ set expandtab
 set smarttab
 set autoindent
 set tabstop=2 shiftwidth=2 softtabstop=2
-set cursorline
+set nocursorline
 set number
 set showmatch
 set incsearch
 set noswapfile
-set swapfile
 set directory=/tmp
 set backup
 set backupdir=/tmp
@@ -57,10 +56,6 @@ set backspace=indent,eol,start
 " txtの自動改行解除
 autocmd FileType text setlocal textwidth=0
 
-autocmd BufNewFile,BufRead *.{vue} set filetype=javascript
-
-" Folding
-set nofoldenable
-set foldmethod=indent
-set foldlevel=2
-set foldnestmax=2
+set laststatus=2
+set matchtime=1
+set display=lastline
