@@ -80,6 +80,9 @@ repo = 'tomtom/tcomment_vim'
 [[plugins]] # クリップボードを yank, paste できるように
 repo = 'kana/vim-fakeclip'
 
+[[plugins]]
+repo = 'johngrib/vim-game-code-break'
+
 
 ###
 ## Ruby
@@ -119,6 +122,16 @@ repo = 'slim-template/vim-slim.git'
 
 [[plugins]] #JavaScript
 repo = 'othree/yajs.vim'
+
+###
+# 補完
+###
+
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+hook_add = '''
+  let g:deoplete#enable_at_startup = 0
+'''
 
 # [[plugins]]
 # repo = 'Shougo/neocomplcache'

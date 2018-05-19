@@ -11,9 +11,16 @@ endif
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
+  if !has('nvim')
+    call dein#add('roxma/nvim-yarp')
+    call dein#add('roxma/vim-hug-neovim-rpc')
+  endif
+
   let g:dein_toml_dir    = expand('~')
   let s:toml      = g:dein_toml_dir . '/.dein.toml'
+  " let s:lazy_toml      = g:dein_toml_dir . '/.dein_lazy.toml'
   call dein#load_toml(s:toml,      {'lazy': 0})
+  " call dein#load_toml(s:lazy_toml, {'lazy': 1})
 
   call dein#end()
   call dein#save_state()
@@ -55,6 +62,9 @@ set backspace=indent,eol,start
 
 " txtの自動改行解除
 autocmd FileType text setlocal textwidth=0
+
+" vue用
+autocmd BufNewFile,BufRead *.{vue} set filetype=html
 
 set laststatus=2
 set matchtime=1
