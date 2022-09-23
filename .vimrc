@@ -26,7 +26,6 @@ if dein#load_state(s:dein_dir)
   call dein#save_state()
 endif
 
-call dein#add('Shougo/vimproc.vim', {'build': 'make'})
 if dein#check_install()
   call dein#install()
 endif
@@ -69,3 +68,11 @@ autocmd BufNewFile,BufRead *.{vue} set filetype=html
 set laststatus=2
 set matchtime=1
 set display=lastline
+
+
+"ファイルタイプの検索を有効にする
+filetype plugin on
+"ファイルタイプに合わせたインデントを利用
+filetype indent on
+"sw=softtabstop, sts=shiftwidth, ts=tabstop, et=expandtabの略
+autocmd FileType elm setlocal sw=4 sts=4 ts=4 et

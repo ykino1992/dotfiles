@@ -5,3 +5,14 @@ vendor/bundle/
 .env
 .env.*
 local_docs/
+
+spec/support/only_failures.rb
+spec/failures.txt
+lib/tasks/my_task.rake
+
+Gemfile.local
+Gemfile.local.lock
+
+.worktree/
+
+.solargraph.yml

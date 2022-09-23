@@ -2,17 +2,19 @@
 # 環境変数
 # -------------------------------------
 
+export XDG_CONFIG_HOME=${HOME}/.config
+
 # SSHで接続した先で日本語が使えるようにする
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 # エディタ
-alias vi='vim'
-export EDITOR=/usr/local/bin/vim
+alias vi='nvim'
+export EDITOR=/usr/local/bin/nvim
 
 # ページャ
-export PAGER=/usr/local/bin/vimpager
-export MANPAGER=/usr/local/bin/vimpager
+export PAGER=less
+export MANPAGER=less
 
 # postgres
 export PGDATA=/usr/local/var/postgres
@@ -184,7 +186,9 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init - zsh)"
 
 # pyenv
-export PATH="$HOME/.pyenv/bin:$PATH"
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 
 # nodenv

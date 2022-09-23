@@ -2,6 +2,23 @@
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
+repo = 'Shougo/vimproc.vim'
+build = 'make'
+
+hook_post_update = '''
+  if dein#util#_is_windows()
+    let cmd = 'tools\\update-dll-mingw'
+  elseif dein#util#_is_cygwin()
+    let cmd = 'make -f make_cygwin.mak'
+  elseif executable('gmake')
+    let cmd = 'gmake'
+  else
+    let cmd = 'make'
+  endif
+  let g:dein#plugin.build = cmd
+'''
+
+[[plugins]]
 repo = 'Shougo/unite.vim'
 hook_add = '''
   let g:unite_enable_start_insert=1
@@ -68,7 +85,7 @@ repo = 'Shougo/neomru.vim'
 [[plugins]] # テストをショートカットキーで実行
 repo = 'janko-m/vim-test'
 hook_add = '''
-  let test#strategy = "dispatch"
+  let test#ruby#use_spring_binstub = 1
   nnoremap <silent> ,tn :TestNearest<CR>
   nnoremap <silent> ,tf :TestFile<CR>
   nnoremap <silent> ,ts :TestSuite<CR>
@@ -80,8 +97,24 @@ repo = 'tomtom/tcomment_vim'
 [[plugins]] # クリップボードを yank, paste できるように
 repo = 'kana/vim-fakeclip'
 
-[[plugins]]
-repo = 'johngrib/vim-game-code-break'
+[[plugins]] # yes <=> false
+repo = 'AndrewRadev/switch.vim'
+hook_add = '''
+  nnoremap <silent> ,s :Switch<CR>
+'''
+
+[[plugins]] # sneak_case <=> CamelCase
+repo = 'tpope/vim-abolish'
+
+[[plugins]] # 人間に見やすくテキストを整形してくれる
+repo = 'junegunn/vim-easy-align'
+hook_add = '''
+  nmap ,a <Plug>(EasyAlign)
+  xmap ,a <Plug>(EasyAlign)
+'''
+
+[[plugins]] # 表整形
+repo = 'godlygeek/tabular'
 
 
 ###
@@ -120,18 +153,37 @@ repo = 'digitaltoad/vim-pug'
 [[plugins]] # Slim
 repo = 'slim-template/vim-slim.git'
 
-[[plugins]] #JavaScript
+[[plugins]] # JavaScript
 repo = 'othree/yajs.vim'
+
+[[plugins]] # ES6, NEXT
+repo = 'othree/es.next.syntax.vim'
+
+[[plugins]] # JSX
+repo = 'maxmellon/vim-jsx-pretty'
+
+[[plugins]] # Elm
+repo = 'andys8/vim-elm-syntax'
+
+[[plugins]]
+repo = 'stephenway/postcss.vim'
 
 ###
 # 補完
 ###
 
 [[plugins]]
-repo = 'Shougo/deoplete.nvim'
-hook_add = '''
-  let g:deoplete#enable_at_startup = 0
-'''
+repo = 'neoclide/coc.nvim'
+rev = 'release'
+on_i = 1
+merged = '0'
+hook_source = 'call coil398#init#coc#hook_source()'
+
+# [[plugins]]
+# repo = 'Shougo/deoplete.nvim'
+# hook_add = '''
+#   let g:deoplete#enable_at_startup = 0
+# '''
 
 # [[plugins]]
 # repo = 'Shougo/neocomplcache'
