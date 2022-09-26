@@ -1,0 +1,22 @@
+{
+  "languageserver": {
+    "elmLS": {
+      "command": "elm-language-server",
+      "filetypes": ["elm"],
+      "rootPatterns": ["elm.json"],
+      "initializationOptions": {
+        "elmAnalyseTrigger": "change"
+      }
+    }
+  },
+  "coc.preferences.formatOnSaveFiletypes": [
+    "ruby"
+  ],
+  "codeLens.enable": true,
+  "solargraph.useBundler": true,
+  "solargraph.bundlerPath": "/Users/y_kino/.rbenv/shims/bundle",
+  "solargraph.diagnostics": true,
+  "solargraph.checkGemVersion": false,
+  "solargraph.formatting": true,
+  "eslint.autoFixOnSave": true
+}
