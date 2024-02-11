@@ -10,7 +10,11 @@
     }
   },
   "coc.preferences.formatOnSaveFiletypes": [
-    "ruby"
+    "ruby",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
   ],
   "codeLens.enable": true,
   "solargraph.useBundler": true,

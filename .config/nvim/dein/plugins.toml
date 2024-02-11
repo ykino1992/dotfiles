@@ -58,7 +58,13 @@ hook_add = '''
   nnoremap <silent> [denite]b :<C-u>Denite buffer -start-filter<CR>
 
   " 検索
-  nnoremap <silent> [denite]g :<C-u>Denite grep -winwidth=`&columns`<CR>
+  nnoremap <silent> [denite]g :<C-u>Denite grep -winwidth=`&columns` -buffer-name=search-buffer-denite<CR>
+  " 検索結果を再表示する
+  nnoremap <silent> [denite]r :<C-u>Denite -resume -buffer-name=search-buffer-denite<CR>
+  " 検索結果の次の行の結果へ飛ぶ
+  nnoremap <silent> [denite]n :<C-u>Denite -resume -buffer-name=search-buffer-denite -cursor-pos=+1 -immediately<CR>
+  " 検索結果の前の行の結果へ飛ぶ
+  nnoremap <silent> [denite]p :<C-u>Denite -resume -buffer-name=search-buffer-denite -cursor-pos=-1 -immediately<CR>
 
 	" フィルター時のマッピング
 	autocmd FileType denite call s:denite_my_settings()
@@ -197,6 +203,8 @@ hook_add = '''
 [[plugins]] # 表整形
 repo = 'godlygeek/tabular'
 
+[[plugins]] # Github Copilot
+repo = 'github/copilot.vim'
 
 ###
 ## Ruby
@@ -298,4 +306,12 @@ hook_add = '''
   endfunction
 
   command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+  let g:coc_global_extensions = [
+    \'coc-prettier',
+    \'coc-eslint',
+    \'coc-tsserver',
+    \'coc-solargraph',
+    \'coc-json'
+  \]
 '''

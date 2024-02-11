@@ -33,6 +33,11 @@ export HISTSIZE=1000
 # 履歴ファイルに保存される履歴の件数
 export SAVEHIST=100000
 
+# なんかRubyのエラーが出るので
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+
+export VOLTA_FEATURE_PNPM=1
+
 # 重複を記録しない
 setopt hist_ignore_dups
 
@@ -180,17 +185,3 @@ function chpwd() { ls -1 }
 function title {
     echo -ne "\033]0;"$*"\007"
 }
-
-# rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init - zsh)"
-
-# pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
-
-# nodenv
-export PATH="$HOME/.nodenv/bin:$PATH"
-eval "$(nodenv init -)"
