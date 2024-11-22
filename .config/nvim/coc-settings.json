@@ -9,18 +9,13 @@
       }
     }
   },
-  "coc.preferences.formatOnSaveFiletypes": [
-    "ruby",
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact"
-  ],
+  "coc.preferences.formatOnSave": true,
   "codeLens.enable": true,
-  "solargraph.useBundler": true,
-  "solargraph.bundlerPath": "/Users/y_kino/.rbenv/shims/bundle",
   "solargraph.diagnostics": true,
   "solargraph.checkGemVersion": false,
   "solargraph.formatting": true,
-  "eslint.autoFixOnSave": true
+  "typescript.referencesCodeLens.enabled": true,
+  "biome.enable": true,
+  "eslint.enable": false,
+  "prettier.enable": false
 }

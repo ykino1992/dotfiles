@@ -127,7 +127,7 @@ repo = 'Shougo/unite.vim'
 repo = 'Shougo/vimfiler'
 hook_add= '''
   let g:vimfiler_safe_mode_by_default=0
-  nnoremap <silent> ,e :<C-u>:VimFilerExplore -split -winwidth=30 -find -no-quit<CR>
+  nnoremap <silent> ,e :<C-u>:VimFilerExplore -split -winwidth=60 -find -no-quit<CR>
 '''
 
 [[plugins]]
@@ -271,6 +271,13 @@ repo = 'jlcrochet/vim-rbs'
 
 [[plugins]]
 repo = 'mracos/mermaid.vim'
+
+[[plugins]]
+repo = 'rust-lang/rust.vim'
+hook_add = '''
+  let g:rustfmt_autosave = 1
+'''
+
 
 ###
 # 補完
