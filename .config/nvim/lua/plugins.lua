@@ -439,9 +439,8 @@ return {
   -- brew install lazygit
   {
     'kdheepak/lazygit.nvim',
-    cmd = "LazyGit",
     config = function()
-      -- 必要であれば追加
+      vim.keymap.set("n", "<leader>lg", ":LazyGit<CR>", { noremap = true, silent = true })
     end
   }
 }
