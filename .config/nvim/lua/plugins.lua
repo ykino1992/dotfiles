@@ -44,13 +44,13 @@ return {
   { "tpope/vim-abolish" },
 
   -- 行や列を揃えることで見やすく整形してくれる
-  {
-    "junegunn/vim-easy-align",
-    config = function()
-      vim.api.nvim_set_keymap('n', ',a', '<Plug>(EasyAlign)', {})
-      vim.api.nvim_set_keymap('x', ',a', '<Plug>(EasyAlign)', {})
-    end
-  },
+  -- {
+  --   "junegunn/vim-easy-align",
+  --   config = function()
+  --     vim.api.nvim_set_keymap('n', ',a', '<Plug>(EasyAlign)', {})
+  --     vim.api.nvim_set_keymap('x', ',a', '<Plug>(EasyAlign)', {})
+  --   end
+  -- },
 
   { "tpope/vim-endwise" },
 
