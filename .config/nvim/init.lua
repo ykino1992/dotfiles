@@ -30,12 +30,31 @@ vim.opt.matchtime = 1
 vim.opt.display = "lastline"
 vim.opt.signcolumn = "yes"
 
+-- ターミナルモードのキーマップ
+if vim.fn.has('nvim') == 1 then
+  vim.keymap.set('t', '<C-o>', [[<C-\><C-n>]], { noremap = true })
+end
+
 -- slimのFileTypeを設定
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   pattern = "*.slim",
   callback = function()
     vim.opt.filetype = "slim"
   end,
+})
+
+-- TODOリストを開く
+vim.keymap.set("n", "<leader>td", [[<cmd>vnew ~/.local/state/todo.md<cr>]], { remap = false, desc = "TODOリストを開く" })
+
+-- Markdownの設定
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "markdown", "markdown_inline" },
+  callback = function()
+    vim.bo.tabstop = 2
+    vim.bo.shiftwidth = 2
+    vim.bo.softtabstop = 2
+    vim.bo.expandtab = true
+  end
 })
 
 require("config.lazy")

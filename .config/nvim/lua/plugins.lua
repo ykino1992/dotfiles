@@ -1,18 +1,33 @@
 return {
   -- カラースキーマ
   {
-    "morhetz/gruvbox",
+    "ellisonleao/gruvbox.nvim",
+    priority = 1000,
     config = function()
       -- load the colorscheme here
       vim.cmd([[colorscheme gruvbox]])
     end,
   },
+  -- {
+  --   "morhetz/gruvbox",
+  --   config = function()
+  --     -- load the colorscheme here
+  --     vim.cmd([[colorscheme gruvbox]])
+  --   end,
+  -- },
 
   -- ステータスラインをかっこよくする
+  -- {
+  --   'itchyny/lightline.vim',
+  --   config = function()
+  --     vim.g.lightline = { colorscheme = 'gruvbox' }
+  --   end
+  -- },
   {
-    'itchyny/lightline.vim',
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
-      vim.g.lightline = { colorscheme = 'gruvbox' }
+      require('lualine').setup()
     end
   },
 
@@ -81,10 +96,10 @@ return {
     build = ':TSUpdate', -- Treesitterのパーサーを自動で更新
     config = function()
       require('nvim-treesitter.configs').setup {
-        ensure_installed = { "rust", "lua", "ruby", "javascript", "typescript", "tsx", "json" }, -- 必要な言語を指定
+        ensure_installed = { "rust", "lua", "ruby", "rbs", "javascript", "typescript", "tsx", "json" }, -- 必要な言語を指定
         highlight = {
-          enable = true,                                                                         -- シンタックスハイライトを有効化
-          additional_vim_regex_highlighting = false,                                             -- 従来のハイライトを無効化
+          enable = true,                                                                                -- シンタックスハイライトを有効化
+          additional_vim_regex_highlighting = false,                                                    -- 従来のハイライトを無効化
         },
         indent = {
           enable = true -- インデント自動調整を有効化
@@ -237,7 +252,8 @@ return {
             vim.lsp.buf.format({
               timeout_ms = 8000,
               filter = function(c)
-                return c.name ~= "ts_ls"
+                -- null_ls にまかせるので ts_ls と biome はフォーマットをスキップ
+                return c.name ~= "ts_ls" and c.name ~= "biome"
               end,
             })
           end
@@ -284,6 +300,26 @@ return {
         capabilities = capabilities,
       }
 
+      -- steepのLSPサーバーを設定
+      -- dependencies:
+      -- - bundle add steep --group "development"
+      -- Steepfileが存在する場合のみsteepのLSPを設定
+      -- local function file_exists(name)
+      --   local f = io.open(name, "r")
+      --   if f ~= nil then
+      --     io.close(f)
+      --     return true
+      --   end
+      --   return false
+      -- end
+      --
+      -- if file_exists("Steepfile") then
+      --   lspconfig.steep.setup {
+      --     capabilities = capabilities,
+      --     cmd = { "bundle", "exec", "steep", "langserver" }
+      --   }
+      -- end
+
       -- rubocop
       -- ruby-lspがやってくれるので不要だった
       -- lspconfig.rubocop.setup {
@@ -306,6 +342,12 @@ return {
         capabilities = capabilities,
       }
 
+      -- biome
+      lspconfig.biome.setup {
+        cmd = { "yarn", "biome", "lsp-proxy" },
+        capabilities = capabilities,
+      }
+
       -- json
       -- dependencies:
       -- - pnpm add -g vscode-langservers-extracted
@@ -316,6 +358,13 @@ return {
       -- rust
       lspconfig.rust_analyzer.setup {
         capabilities = capabilities,
+        settings = {
+          ["rust-analyzer"] = {
+            check = {
+              command = "clippy",
+            },
+          },
+        },
       }
     end
   },
@@ -338,7 +387,7 @@ return {
           -- クラスの並び替え
           -- dependencies:
           -- - brew install avencera/tap/rustywind
-          null_ls.builtins.formatting.rustywind,
+          -- null_ls.builtins.formatting.rustywind,
         },
       }
     end
@@ -452,7 +501,11 @@ return {
     lazy = false,
     version = false, -- set this if you want to always pull the latest change
     opts = {
-      provider = "openai",
+      provider = "copilot",
+      copilot = {
+        model = "claude-3.5-sonnet",
+        -- max_tokens = 4096,
+      },
       behaviour = {
         auto_suggestions = false
       }
@@ -491,6 +544,16 @@ return {
         'MeanderingProgrammer/render-markdown.nvim',
         opts = {
           file_types = { "markdown", "Avante" },
+          heading = {
+            backgrounds = {
+              '',
+              '',
+              '',
+              '',
+              '',
+              '',
+            },
+          }
         },
         ft = { "markdown", "Avante" },
       },
