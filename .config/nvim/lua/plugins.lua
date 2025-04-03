@@ -39,10 +39,22 @@ return {
     end
   },
 
-  { "ntpeters/vim-better-whitespace" },
+  {
+    "ntpeters/vim-better-whitespace",
+    config = function()
+      vim.g.better_whitespace_operator = false
+    end
+  },
 
   -- コメントアウトをヴィジュアルモードで行えるようにする
-  { "tomtom/tcomment_vim" },
+  -- { "tomtom/tcomment_vim" },
+
+  {
+    "folke/ts-comments.nvim",
+    opts = {},
+    event = "VeryLazy",
+    -- enabled = vim.fn.has("nvim-0.10.0") == 1,
+  },
 
   -- クリップボードを yank, paste できるように
   { "kana/vim-fakeclip" },
@@ -51,7 +63,7 @@ return {
   {
     "AndrewRadev/switch.vim",
     config = function()
-      vim.api.nvim_set_keymap('n', ',s', ':Switch<CR>', { noremap = true, silent = true })
+      vim.api.nvim_set_keymap('n', '<leader>s', ':Switch<CR>', { noremap = true, silent = true })
     end
   },
 
@@ -503,11 +515,12 @@ return {
     opts = {
       provider = "copilot",
       copilot = {
-        model = "claude-3.5-sonnet",
+        model = "claude-3.7-sonnet",
         -- max_tokens = 4096,
       },
       behaviour = {
-        auto_suggestions = false
+        auto_suggestions = false,
+        -- enable_cursor_planning_mode = true,
       }
       -- add any opts here
     },
