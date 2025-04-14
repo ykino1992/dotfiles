@@ -36,7 +36,6 @@ export SAVEHIST=100000
 # なんかRubyのエラーが出るので
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
-export VOLTA_FEATURE_PNPM=1
 
 # 重複を記録しない
 setopt hist_ignore_dups
@@ -157,6 +156,9 @@ alias l1="ls -1"
 # tree
 alias tree="tree -NC" # N: 文字化け対策, C:色をつける
 
+# Godot bin
+alias godot="/Applications/Godot.app/Contents/MacOS/Godot"
+
 
 # -------------------------------------
 # キーバインド
@@ -193,3 +195,6 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
