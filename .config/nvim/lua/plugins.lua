@@ -100,7 +100,21 @@ return {
   { 'tpope/vim-rails' },
 
   -- Github Copilot
-  { "github/copilot.vim" },
+  -- { "github/copilot.vim" },
+  {
+    "zbirenbaum/copilot.lua",
+    config = function()
+      require("copilot").setup({
+        suggestion = {
+          auto_trigger = true,
+          hide_during_completion = false,
+          keymap = {
+            accept = '<Tab>',
+          },
+        },
+      })
+    end,
+  },
 
   -- シンタックスハイライト
   {
