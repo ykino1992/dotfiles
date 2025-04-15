@@ -378,6 +378,11 @@ return {
           },
         },
       }
+
+      -- GDScript
+      lspconfig.gdscript.setup {
+        name = "godot"
+      }
     end
   },
 
@@ -400,6 +405,8 @@ return {
           -- dependencies:
           -- - brew install avencera/tap/rustywind
           -- null_ls.builtins.formatting.rustywind,
+          -- GDScript
+          null_ls.builtins.formatting.gdformat
         },
       }
     end
@@ -515,7 +522,7 @@ return {
     opts = {
       provider = "copilot",
       copilot = {
-        model = "claude-3.7-sonnet",
+        model = "gpt-4o",
         -- max_tokens = 4096,
       },
       behaviour = {

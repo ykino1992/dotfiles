@@ -60,5 +60,7 @@ vim.api.nvim_create_autocmd("FileType", {
 require("config.lazy")
 
 -- コメントアウトのキーマッピング（Ctrl-/）
-vim.keymap.set('n', '<C-/>', 'gcc', { remap = true })  -- ノーマルモード
+vim.keymap.set('n', '<C-/>', 'gcc', { remap = true }) -- ノーマルモード
 vim.keymap.set('v', '<C-/>', 'gc', { remap = true })  -- ビジュアルモード
+
+vim.api.nvim_command('filetype plugin on')
