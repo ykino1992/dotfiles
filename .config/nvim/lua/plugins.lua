@@ -536,7 +536,7 @@ return {
     opts = {
       provider = "copilot",
       copilot = {
-        model = "gpt-4o",
+        model = "claude-3.5-sonnet",
         -- max_tokens = 4096,
       },
       behaviour = {
