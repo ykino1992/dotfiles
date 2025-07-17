@@ -107,9 +107,9 @@ return {
       require("copilot").setup({
         suggestion = {
           auto_trigger = true,
-          hide_during_completion = false,
+          trigger_on_accept = false,
           keymap = {
-            accept = '<Tab>',
+            accept = '<C-space>',
           },
         },
       })
@@ -122,10 +122,10 @@ return {
     build = ':TSUpdate', -- Treesitterのパーサーを自動で更新
     config = function()
       require('nvim-treesitter.configs').setup {
-        ensure_installed = { "rust", "lua", "ruby", "rbs", "javascript", "typescript", "tsx", "json" }, -- 必要な言語を指定
+        ensure_installed = { "rust", "lua", "ruby", "rbs", "javascript", "typescript", "tsx", "json", "typespec" }, -- 必要な言語を指定
         highlight = {
-          enable = true,                                                                                -- シンタックスハイライトを有効化
-          additional_vim_regex_highlighting = false,                                                    -- 従来のハイライトを無効化
+          enable = true,                                                                                            -- シンタックスハイライトを有効化
+          additional_vim_regex_highlighting = false,                                                                -- 従来のハイライトを無効化
         },
         indent = {
           enable = true -- インデント自動調整を有効化
@@ -277,10 +277,10 @@ return {
           local function my_format()
             vim.lsp.buf.format({
               timeout_ms = 8000,
-              filter = function(c)
-                -- null_ls にまかせるので ts_ls と biome はフォーマットをスキップ
-                return c.name ~= "ts_ls" and c.name ~= "biome"
-              end,
+              -- filter = function(c)
+              --   -- null_ls にまかせるので ts_ls と biome はフォーマットをスキップ
+              --   return c.name ~= "ts_ls" and c.name ~= "biome"
+              -- end,
             })
           end
 
@@ -370,7 +370,8 @@ return {
 
       -- biome
       lspconfig.biome.setup {
-        cmd = { "yarn", "biome", "lsp-proxy" },
+        -- cmd = { "yarn", "biome", "lsp-proxy" },
+        cmd = { "npm", "exec", "biome", "lsp-proxy" },
         capabilities = capabilities,
       }
 
@@ -410,17 +411,17 @@ return {
       null_ls.setup {
         sources = {
           -- biome
-          null_ls.builtins.formatting.biome.with({
-            args =
-            { "check", "--write", "--skip-errors", "--stdin-file-path", "$FILENAME" }
-          }),
+          -- null_ls.builtins.formatting.biome.with({
+          --   args =
+          --   { "check", "--write", "--skip-errors", "--stdin-file-path", "$FILENAME" }
+          -- }),
           -- tailwindcss
           -- クラスの並び替え
           -- dependencies:
           -- - brew install avencera/tap/rustywind
           -- null_ls.builtins.formatting.rustywind,
           -- GDScript
-          null_ls.builtins.formatting.gdformat
+          -- null_ls.builtins.formatting.gdformat
         },
       }
     end
@@ -519,78 +520,133 @@ return {
 
   -- git!!
   -- brew install lazygit
+  -- {
+  --   'kdheepak/lazygit.nvim',
+  --   config = function()
+  --     vim.keymap.set("n", "<leader>lg", ":LazyGit<CR>", { noremap = true, silent = true })
+  --   end
+  -- },
+
   {
-    'kdheepak/lazygit.nvim',
+    "tpope/vim-fugitive",
     config = function()
-      vim.keymap.set("n", "<leader>lg", ":LazyGit<CR>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap("n", "<leader>v", ":vert G<CR>", { noremap = true, silent = true })
+    end,
+    -- cmd = {
+    --   "G",
+    --   "Git",
+    --   "Gdiffsplit",
+    --   "Gread",
+    --   "Gwrite",
+    --   "Ggrep",
+    --   "GMove",
+    --   "GDelete",
+    --   "GBrowse",
+    --   "GRemove",
+    --   "GRename"
+    -- },
+    -- ft = { "fugitive" }
+  },
+
+  {
+    'lewis6991/gitsigns.nvim',
+    config = function()
+      require('gitsigns').setup()
+      vim.api.nvim_set_keymap("n", "<leader><Space>", ":Gitsigns stage_hunk<CR>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap("n", "<leader>h", ":Gitsigns preview_hunk<CR>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap("n", "<leader>r", ":Gitsigns reset_hunk<CR>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap("n", "<leader>n", ":Gitsigns nav_hunk next<CR>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap("n", "<leader>p", ":Gitsigns nav_hunk prev<CR>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap("n", "<leader>q", ":Gitsigns setqflist all<CR>", { noremap = true, silent = true })
     end
   },
 
   -- Avante
   -- AIと連携してコードを書ける
-  {
-    "yetone/avante.nvim",
-    event = "VeryLazy",
-    lazy = false,
-    version = false, -- set this if you want to always pull the latest change
-    opts = {
-      provider = "copilot",
-      copilot = {
-        model = "claude-3.5-sonnet",
-        -- max_tokens = 4096,
-      },
-      behaviour = {
-        auto_suggestions = false,
-        -- enable_cursor_planning_mode = true,
-      }
-      -- add any opts here
-    },
-    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-    build = "make",
-    -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "stevearc/dressing.nvim",
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-      --- The below dependencies are optional,
-      "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-      "zbirenbaum/copilot.lua",      -- for providers='copilot'
-      {
-        -- support for image pasting
-        "HakonHarnes/img-clip.nvim",
-        event = "VeryLazy",
-        opts = {
-          -- recommended settings
-          default = {
-            embed_image_as_base64 = false,
-            prompt_for_file_name = false,
-            drag_and_drop = {
-              insert_mode = true,
-            },
-            -- required for Windows users
-            use_absolute_path = true,
-          },
-        },
-      },
-      {
-        -- Make sure to set this up properly if you have lazy=true
-        'MeanderingProgrammer/render-markdown.nvim',
-        opts = {
-          file_types = { "markdown", "Avante" },
-          heading = {
-            backgrounds = {
-              '',
-              '',
-              '',
-              '',
-              '',
-              '',
-            },
-          }
-        },
-        ft = { "markdown", "Avante" },
-      },
-    },
-  }
+  -- {
+  --   "yetone/avante.nvim",
+  --   event = "VeryLazy",
+  --   lazy = false,
+  --   version = false, -- set this if you want to always pull the latest change
+  --   opts = {
+  --     provider = "copilot",
+  --     providers = {
+  --       copilot = {
+  --         model = "claude-sonnet-4",
+  --         disable_tools = true,
+  --         mode = "legacy"
+  --       }
+  --     },
+  --     behaviour = {
+  --       auto_suggestions = false,
+  --       -- enable_cursor_planning_mode = true,
+  --     }
+  --     -- add any opts here
+  --   },
+  --   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+  --   build = "make",
+  --   -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+  --   dependencies = {
+  --     "nvim-treesitter/nvim-treesitter",
+  --     "stevearc/dressing.nvim",
+  --     "nvim-lua/plenary.nvim",
+  --     "MunifTanjim/nui.nvim",
+  --     --- The below dependencies are optional,
+  --     "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+  --     "zbirenbaum/copilot.lua",      -- for providers='copilot'
+  --     {
+  --       -- support for image pasting
+  --       "HakonHarnes/img-clip.nvim",
+  --       event = "VeryLazy",
+  --       opts = {
+  --         -- recommended settings
+  --         default = {
+  --           embed_image_as_base64 = false,
+  --           prompt_for_file_name = false,
+  --           drag_and_drop = {
+  --             insert_mode = true,
+  --           },
+  --           -- required for Windows users
+  --           use_absolute_path = true,
+  --         },
+  --       },
+  --     },
+  --     {
+  --       -- Make sure to set this up properly if you have lazy=true
+  --       'MeanderingProgrammer/render-markdown.nvim',
+  --       opts = {
+  --         file_types = { "Avante" },
+  --         heading = {
+  --           backgrounds = {
+  --             '',
+  --             '',
+  --             '',
+  --             '',
+  --             '',
+  --             '',
+  --           },
+  --         }
+  --       },
+  --       ft = { "Avante" },
+  --     },
+  --   },
+  -- }
+
+
+  -- {
+  --   "greggh/claude-code.nvim",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim", -- Required for git operations
+  --   },
+  --   config = function()
+  --     require("claude-code").setup({
+  --       -- Terminal window settings
+  --       window = {
+  --         split_ratio = 0.3,
+  --         position = "botright vertical",
+  --       }
+  --     })
+  --     vim.keymap.set('n', '<leader>aa', '<cmd>ClaudeCode<CR>', { desc = 'Toggle Claude Code' })
+  --   end
+  -- },
 }

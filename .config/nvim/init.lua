@@ -64,3 +64,18 @@ vim.keymap.set('n', '<C-/>', 'gcc', { remap = true }) -- ノーマルモード
 vim.keymap.set('v', '<C-/>', 'gc', { remap = true })  -- ビジュアルモード
 
 vim.api.nvim_command('filetype plugin on')
+
+vim.keymap.set('n', '<leader>x', function()
+  local path = vim.fn.expand('%')
+  vim.fn.setreg('+', path)
+  print('Copied: ' .. path)
+end)
+
+-- Claudeターミナルを開く
+local claude_counter = 0
+vim.keymap.set('n', '<C-,>', function()
+  claude_counter = claude_counter + 1
+  vim.cmd('rightbelow vsplit')
+  vim.cmd('terminal claude')
+  vim.cmd('file claude' .. claude_counter)
+end, { desc = "Open Claude in terminal" })
