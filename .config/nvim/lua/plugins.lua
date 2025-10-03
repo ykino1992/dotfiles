@@ -1,28 +1,18 @@
 return {
   -- カラースキーマ
   {
-    "ellisonleao/gruvbox.nvim",
+    "catppuccin/nvim",
+    name = "catppuccin",
     priority = 1000,
     config = function()
-      -- load the colorscheme here
-      vim.cmd([[colorscheme gruvbox]])
+      require("catppuccin").setup({
+        transparent_background = true,
+      })
+      vim.cmd.colorscheme("catppuccin-macchiato")
     end,
   },
-  -- {
-  --   "morhetz/gruvbox",
-  --   config = function()
-  --     -- load the colorscheme here
-  --     vim.cmd([[colorscheme gruvbox]])
-  --   end,
-  -- },
 
   -- ステータスラインをかっこよくする
-  -- {
-  --   'itchyny/lightline.vim',
-  --   config = function()
-  --     vim.g.lightline = { colorscheme = 'gruvbox' }
-  --   end
-  -- },
   {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -58,6 +48,38 @@ return {
 
   -- クリップボードを yank, paste できるように
   { "kana/vim-fakeclip" },
+
+  -- ブランチごとのメモ管理
+  {
+    "yujinyuz/gitpad.nvim",
+    config = function()
+      require('gitpad').setup({
+        window_type = 'split',
+        floating_win_opts = {
+          style = 'minimal',
+        },
+        split_win_opts = {
+          split = 'right',
+        },
+      })
+    end,
+    keys = {
+      {
+        '<leader>pp',
+        function()
+          require('gitpad').toggle_gitpad() -- or require('gitpad').toggle_gitpad({ title = 'Project notes' })
+        end,
+        desc = 'gitpad project notes',
+      },
+      {
+        '<leader>pb',
+        function()
+          require('gitpad').toggle_gitpad_branch()
+        end,
+        desc = 'gitpad branch notes'
+      },
+    }
+  },
 
   -- `,s` で true と false を切り替える
   {
@@ -122,10 +144,10 @@ return {
     build = ':TSUpdate', -- Treesitterのパーサーを自動で更新
     config = function()
       require('nvim-treesitter.configs').setup {
-        ensure_installed = { "rust", "lua", "ruby", "rbs", "javascript", "typescript", "tsx", "json", "typespec" }, -- 必要な言語を指定
+        ensure_installed = { "rust", "lua", "ruby", "rbs", "javascript", "typescript", "tsx", "json", "typespec", "c_sharp" }, -- 必要な言語を指定
         highlight = {
-          enable = true,                                                                                            -- シンタックスハイライトを有効化
-          additional_vim_regex_highlighting = false,                                                                -- 従来のハイライトを無効化
+          enable = true,                                                                                                       -- シンタックスハイライトを有効化
+          additional_vim_regex_highlighting = false,                                                                           -- 従来のハイライトを無効化
         },
         indent = {
           enable = true -- インデント自動調整を有効化
@@ -340,10 +362,10 @@ return {
       -- end
       --
       -- if file_exists("Steepfile") then
-      --   lspconfig.steep.setup {
-      --     capabilities = capabilities,
-      --     cmd = { "bundle", "exec", "steep", "langserver" }
-      --   }
+      lspconfig.steep.setup {
+        capabilities = capabilities,
+        cmd = { "bundle", "exec", "steep", "langserver" }
+      }
       -- end
 
       -- rubocop
@@ -398,6 +420,61 @@ return {
       lspconfig.gdscript.setup {
         name = "godot"
       }
+
+      -- C# (OmniSharp)
+      -- dependencies:
+      -- - .NET SDK (https://dotnet.microsoft.com/download)
+      -- - OmniSharp installation:
+      --   mkdir -p ~/.local/bin/omnisharp-roslyn
+      --   # For Apple Silicon (M1/M2/M3):
+      --   curl -sSL https://github.com/OmniSharp/omnisharp-roslyn/releases/latest/download/omnisharp-osx-arm64-net6.0.tar.gz | tar xvzf - -C ~/.local/bin/omnisharp-roslyn
+      --   # For Intel Mac:
+      --   # curl -sSL https://github.com/OmniSharp/omnisharp-roslyn/releases/latest/download/omnisharp-osx-x64-net6.0.tar.gz | tar xvzf - -C ~/.local/bin/omnisharp-roslyn
+      --   chmod 744 ~/.local/bin/omnisharp-roslyn/*
+      local pid = vim.fn.getpid()
+      local omnisharp_bin = vim.fn.expand("~/.local/bin/omnisharp-roslyn/OmniSharp")
+      lspconfig.omnisharp.setup {
+        cmd = { omnisharp_bin, "--languageserver", "--hostPID", tostring(pid) },
+        capabilities = capabilities,
+        root_dir = lspconfig.util.root_pattern("*.sln", "*.csproj"),
+        settings = {
+          FormattingOptions = {
+            EnableEditorConfigSupport = true,
+          },
+          MsBuild = {
+            LoadProjectsOnDemand = false,
+          },
+          RoslynExtensionsOptions = {
+            EnableAnalyzersSupport = true,
+            EnableImportCompletion = true,
+          },
+          Sdk = {
+            IncludePrereleases = false,
+          },
+        },
+      }
+
+      local configs = require("lspconfig.configs")
+      if not configs.kotlin_lsp then
+        configs.kotlin_lsp = {
+          default_config = {
+            filetypes = { 'kotlin' },
+            cmd = { 'kotlin-lsp', '--stdio' },
+            root_markers = {
+              'settings.gradle',     -- Gradle (multi-project)
+              'settings.gradle.kts', -- Gradle (multi-project)
+              'pom.xml',             -- Maven
+              'build.gradle',        -- Gradle
+              'build.gradle.kts',    -- Gradle
+              'workspace.json',      -- Used to integrate your own build system
+            },
+          }
+        }
+      end
+
+      -- Kotlin
+      -- lspconfig.kotlin_lsp.setup {}
+      vim.lsp.enable("kotlin_lsp")
     end
   },
 
@@ -552,12 +629,12 @@ return {
     'lewis6991/gitsigns.nvim',
     config = function()
       require('gitsigns').setup()
-      vim.api.nvim_set_keymap("n", "<leader><Space>", ":Gitsigns stage_hunk<CR>", { noremap = true, silent = true })
-      vim.api.nvim_set_keymap("n", "<leader>h", ":Gitsigns preview_hunk<CR>", { noremap = true, silent = true })
-      vim.api.nvim_set_keymap("n", "<leader>r", ":Gitsigns reset_hunk<CR>", { noremap = true, silent = true })
-      vim.api.nvim_set_keymap("n", "<leader>n", ":Gitsigns nav_hunk next<CR>", { noremap = true, silent = true })
-      vim.api.nvim_set_keymap("n", "<leader>p", ":Gitsigns nav_hunk prev<CR>", { noremap = true, silent = true })
-      vim.api.nvim_set_keymap("n", "<leader>q", ":Gitsigns setqflist all<CR>", { noremap = true, silent = true })
+      -- vim.api.nvim_set_keymap("n", "<leader><Space>", ":Gitsigns stage_hunk<CR>", { noremap = true, silent = true })
+      -- vim.api.nvim_set_keymap("n", "<leader>h", ":Gitsigns preview_hunk<CR>", { noremap = true, silent = true })
+      -- vim.api.nvim_set_keymap("n", "<leader>r", ":Gitsigns reset_hunk<CR>", { noremap = true, silent = true })
+      -- vim.api.nvim_set_keymap("n", "<leader>n", ":Gitsigns nav_hunk next<CR>", { noremap = true, silent = true })
+      -- vim.api.nvim_set_keymap("n", "<leader>p", ":Gitsigns nav_hunk prev<CR>", { noremap = true, silent = true })
+      -- vim.api.nvim_set_keymap("n", "<leader>q", ":Gitsigns setqflist all<CR>", { noremap = true, silent = true })
     end
   },
 

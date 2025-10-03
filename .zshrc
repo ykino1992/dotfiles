@@ -199,5 +199,5 @@ esac
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
-# mise
-eval "$(/Users/y_kino/.local/bin/mise activate zsh)"
+
+alias claude="/Users/y_kino/.claude/local/claude"

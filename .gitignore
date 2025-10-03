@@ -14,5 +14,15 @@ Gemfile.local
 Gemfile.local.lock
 
 .worktree/
+/wt1/
+/wt2/
+/wt3/
+/wt4/
+/wt5/
 
 .solargraph.yml
+
+local/
+
+# Local settings
+settings.local.json
