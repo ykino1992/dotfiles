@@ -17,6 +17,7 @@
   - `ln -sf ~/dotfiles/.config/mise/config.toml ~/.config/mise/config.toml`
 - hammerspoon
   - https://www.hammerspoon.org/
+  - `ln -sf ~/dotfiles/.hammerspoon ~/.hammerspoon`
 - neovim
   - `brew install neovim`
   - `ln -sf ~/dotfiles/.config/nvim ~/.config/nvim`
