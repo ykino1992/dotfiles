@@ -1,3 +1,6 @@
 [core]
 	editor = vim
 	excludesfile = ~/.gitignore
+[user]
+	email = ykino1992@gmail.com
+	name = yusuke.kinoshita
