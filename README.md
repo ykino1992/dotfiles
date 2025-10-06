@@ -14,6 +14,7 @@
   - `gh auth login`
 - mise
   - `brew install mise`
+  - `ln -sf ~/dotfiles/.config/mise/config.toml ~/.config/mise/config.toml`
 - hammerspoon
   - https://www.hammerspoon.org/
 - neovim

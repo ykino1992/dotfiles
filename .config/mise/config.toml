@@ -1,0 +1,4 @@
+[tools]
+lua-language-server = "latest"
+node = "latest"
+ripgrep = "latest"
