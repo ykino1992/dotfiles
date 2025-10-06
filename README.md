@@ -1,4 +1,4 @@
-# mac setuo
+# mac setup
 
 - homebrew
   - https://brew.sh/ja/
