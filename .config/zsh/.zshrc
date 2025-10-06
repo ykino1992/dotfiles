@@ -189,7 +189,7 @@ function title {
 }
 
 # pnpm
-export PNPM_HOME="/Users/y_kino/Library/pnpm"
+export PNPM_HOME="~/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -199,5 +199,11 @@ esac
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
+# brew
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
-alias claude="/Users/y_kino/.claude/local/claude"
+
+# mise
+eval "$(~/.local/bin/mise activate zsh)"
+
+alias claude="~/.claude/local/claude"

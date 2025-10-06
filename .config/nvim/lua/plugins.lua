@@ -280,6 +280,7 @@ return {
       -- ファイラーを開く
       vim.api.nvim_set_keymap('n', '<Leader>e', '::Fern . -reveal=% -drawer -width=60<CR>',
         { noremap = true, silent = true })
+      vim.g['fern#default_hidden'] = 1
     end
   },
 
@@ -344,9 +345,9 @@ return {
       -- rubyのLSPサーバーを設定
       -- dependencies:
       -- - gem install ruby-lsp
-      lspconfig.ruby_lsp.setup {
-        capabilities = capabilities,
-      }
+      -- lspconfig.ruby_lsp.setup {
+      --   capabilities = capabilities,
+      -- }
 
       -- steepのLSPサーバーを設定
       -- dependencies:
@@ -362,10 +363,10 @@ return {
       -- end
       --
       -- if file_exists("Steepfile") then
-      lspconfig.steep.setup {
-        capabilities = capabilities,
-        cmd = { "bundle", "exec", "steep", "langserver" }
-      }
+      -- lspconfig.steep.setup {
+      --   capabilities = capabilities,
+      --   cmd = { "bundle", "exec", "steep", "langserver" }
+      -- }
       -- end
 
       -- rubocop

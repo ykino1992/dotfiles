@@ -1,0 +1,32 @@
+# mac setuo
+
+- homebrew
+  - https://brew.sh/ja/
+- wezterm
+  - https://wezterm.org/index.html
+  - `brew install font-hackgen-nerd`
+  - `ln -sf ~/dotfiles/.config/wezterm ~/.config/wezterm`
+- git
+  - `ln -sf ~/dotfiles/.config/git/config ~/.gitconfig`
+  - `ln -sf ~/dotfiles/.config/git/ignore ~/.gitignore`
+- github cli
+  - `brew install gh`
+  - `gh auth login`
+- mise
+  - `brew install mise`
+- hammerspoon
+  - https://www.hammerspoon.org/
+- neovim
+  - `brew install neovim`
+  - `ln -sf ~/dotfiles/.config/nvim ~/.config/nvim`
+  - `git config --global core.editor vim`
+- zsh
+  - `ln -sf ~/dotfiles/.config/zsh/.zshrc ~/.zshrc`
+- claude code
+  - `.zshrc` の `alias claude=` 行をコメントアウト
+  - `npm install -g @anthropic-ai/claude-code`
+  - `claude migrate-installer`
+  - `git checkout -- .zshrc`
+- kotlin-lsp
+  - https://github.com/Kotlin/kotlin-lsp
+  - NOTE: mise で管理できるようになったら mise で管理する

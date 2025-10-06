@@ -47,10 +47,6 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   end,
 })
 
--- TODOリストを開く
--- local todo = require("todo")
--- vim.keymap.set("n", "<leader>td", todo.open_todo, { remap = false, desc = "TODOリストを開く" })
-
 -- Markdownの設定
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "markdown", "markdown_inline" },
